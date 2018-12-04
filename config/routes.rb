@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'employees/show'
   get 'plannings/show'
   get 'plannings/edit'
   get 'bookings/index'
