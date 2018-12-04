@@ -1,0 +1,2 @@
+class ClientsProfilesController < ApplicationController
+end

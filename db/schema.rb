@@ -10,40 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2018_12_04_153246) do
+ActiveRecord::Schema.define(version: 2018_12_04_170659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clients", force: :cascade do |t|
+  create_table "clients_profiles", force: :cascade do |t|
     t.string "house_name"
     t.bigint "user_id"
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_clients_on_company_id"
-    t.index ["user_id"], name: "index_clients_on_user_id"
+    t.index ["company_id"], name: "index_clients_profiles_on_company_id"
+    t.index ["user_id"], name: "index_clients_profiles_on_user_id"
   end
 
-  create_table "companies", force: :cascade do |t|
+  create_table "companies_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "name"
-    t.index ["user_id"], name: "index_companies_on_user_id"
+    t.index ["user_id"], name: "index_companies_profiles_on_user_id"
   end
 
-  create_table "employees", force: :cascade do |t|
+  create_table "employees_profiles", force: :cascade do |t|
     t.string "competence"
     t.bigint "user_id"
     t.bigint "service_id"
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_employees_on_company_id"
-    t.index ["service_id"], name: "index_employees_on_service_id"
-    t.index ["user_id"], name: "index_employees_on_user_id"
+    t.index ["company_id"], name: "index_employees_profiles_on_company_id"
+    t.index ["service_id"], name: "index_employees_profiles_on_service_id"
+    t.index ["user_id"], name: "index_employees_profiles_on_user_id"
   end
 
   create_table "plannings", force: :cascade do |t|
@@ -80,11 +79,11 @@ ActiveRecord::Schema.define(version: 2018_12_04_153246) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "clients", "companies"
-  add_foreign_key "clients", "users"
-  add_foreign_key "companies", "users"
-  add_foreign_key "employees", "companies"
-  add_foreign_key "employees", "services"
-  add_foreign_key "employees", "users"
-  add_foreign_key "plannings", "companies"
+  add_foreign_key "clients_profiles", "companies_profiles", column: "company_id"
+  add_foreign_key "clients_profiles", "users"
+  add_foreign_key "companies_profiles", "users"
+  add_foreign_key "employees_profiles", "companies_profiles", column: "company_id"
+  add_foreign_key "employees_profiles", "services"
+  add_foreign_key "employees_profiles", "users"
+  add_foreign_key "plannings", "companies_profiles", column: "company_id"
 end
