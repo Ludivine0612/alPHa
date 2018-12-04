@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2018_12_04_153246) do
 
   # These are extensions that must be enabled in order to support this database
@@ -31,6 +32,18 @@ ActiveRecord::Schema.define(version: 2018_12_04_153246) do
     t.bigint "user_id"
     t.string "name"
     t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "competence"
+    t.bigint "user_id"
+    t.bigint "service_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_employees_on_company_id"
+    t.index ["service_id"], name: "index_employees_on_service_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
   create_table "plannings", force: :cascade do |t|
@@ -70,5 +83,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_153246) do
   add_foreign_key "clients", "companies"
   add_foreign_key "clients", "users"
   add_foreign_key "companies", "users"
+  add_foreign_key "employees", "companies"
+  add_foreign_key "employees", "services"
+  add_foreign_key "employees", "users"
   add_foreign_key "plannings", "companies"
 end
