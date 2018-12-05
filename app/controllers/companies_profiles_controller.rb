@@ -1,2 +1,0 @@
-class CompaniesProfilesController < ApplicationController
-end

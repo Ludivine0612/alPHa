@@ -10,55 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_170659) do
+ActiveRecord::Schema.define(version: 2018_12_05_142910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clients_profiles", force: :cascade do |t|
-    t.string "house_name"
-    t.bigint "user_id"
-    t.bigint "company_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_clients_profiles_on_company_id"
-    t.index ["user_id"], name: "index_clients_profiles_on_user_id"
-  end
-
-  create_table "companies_profiles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
+  create_table "activities", force: :cascade do |t|
     t.string "name"
-    t.index ["user_id"], name: "index_companies_profiles_on_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "employees_profiles", force: :cascade do |t|
-    t.string "competence"
+  create_table "bookings", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.string "location"
+    t.bigint "company_id"
     t.bigint "user_id"
-    t.bigint "service_id"
-    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_employees_profiles_on_company_id"
-    t.index ["service_id"], name: "index_employees_profiles_on_service_id"
-    t.index ["user_id"], name: "index_employees_profiles_on_user_id"
+    t.index ["company_id"], name: "index_bookings_on_company_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "plannings", force: :cascade do |t|
-    t.date "started"
-    t.date "ended"
-    t.bigint "company_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_plannings_on_company_id"
-  end
-
-  create_table "services", force: :cascade do |t|
+  create_table "companies", force: :cascade do |t|
+    t.string "siret"
     t.string "name"
-    t.text "description"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
+  create_table "prestations", force: :cascade do |t|
+    t.string "description"
+    t.bigint "activity_id"
+    t.bigint "booking_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_prestations_on_activity_id"
+    t.index ["booking_id"], name: "index_prestations_on_booking_id"
+    t.index ["job_id"], name: "index_prestations_on_job_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.bigint "job_id"
+    t.bigint "activity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_skills_on_activity_id"
+    t.index ["job_id"], name: "index_skills_on_job_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,23 +78,25 @@ ActiveRecord::Schema.define(version: 2018_12_04_170659) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "first_name"
     t.string "last_name"
+    t.string "first_name"
     t.string "address"
     t.string "phone_number"
-    t.string "role"
-    t.string "photo_url"
+    t.string "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "clients_profiles", "companies_profiles", column: "company_id"
-  add_foreign_key "clients_profiles", "users"
-  add_foreign_key "companies_profiles", "users"
-  add_foreign_key "employees_profiles", "companies_profiles", column: "company_id"
-  add_foreign_key "employees_profiles", "services"
-  add_foreign_key "employees_profiles", "users"
-  add_foreign_key "plannings", "companies_profiles", column: "company_id"
+  add_foreign_key "bookings", "companies"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "companies", "users"
+  add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "users"
+  add_foreign_key "prestations", "activities"
+  add_foreign_key "prestations", "bookings"
+  add_foreign_key "prestations", "jobs"
+  add_foreign_key "skills", "activities"
+  add_foreign_key "skills", "jobs"
 end
