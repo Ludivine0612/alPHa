@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  get 'employees/show'
-  get 'plannings/show'
-  get 'plannings/edit'
-  get 'bookings/index'
-  get 'bookings/show'
-  get 'bookings/new'
-  get 'bookings/edit'
-  devise_for :users
   root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :services
+
+  devise_for :user
+
+  resources :employees_profile
+  resources :clients_profiles
+  resources :companies_profiles
+
+  resources :plannings do
+    resources :bookings
+  end
 end
