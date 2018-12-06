@@ -1,0 +1,7 @@
+<h1>Edition de la prestation</h1>
+
+<%= simple_form_for @prestation, :url => prestations_edit_path do |f| %>
+  <%= f.input :description, as: :text %>
+  <%= f.button :submit %>
+<% end %>
+
