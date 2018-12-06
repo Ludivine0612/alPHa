@@ -5,5 +5,4 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index, :show]
   resources :prestations, only: :update
   resources :companies, only: [:index, :show]
-
 end
