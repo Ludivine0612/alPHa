@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <% @companies.each do |company| %>
+    <%= link_to company do %>
+    <div class="col-xs-12 col-sm-4">
+      <!-- insert <div class="card"> -->
+      <ul>
+        <li><h5><%= company.name %></h5></li>
+        <li><p><%= company.siret %></p></li>
+      </ul>
+    </div>
+  </div>
+    <% end %>
+    <% end %>
+</div>
