@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get 'prestations/new'
-  get 'prestations/edit'
-  root to: 'pages#home'
+  root to: 'pages#banner'
+  get '/home', to: 'pages#home'
 
   devise_for :users
   resources :bookings, only: [:index, :show]

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://weloveiconfonts.com/api/?family=fontawesome">
+    <link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="banner.css">
+    <title>alPHa/banner</title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+  </head>
+  <body>
+    <div class="banner" style="background-image: url('<%= image_path 'banner.png' %>');">
+      <div class="banner-content">
+        <h1>alPHa</h1>
+        <p>Services de luxe</p>
+        <a href= "/home" class="button"><span>Découvrir</span></a>
+      </div>
+    </div>
+    <nav>
+          <ul class="clearfix">
+            <li><a href="#"><span class="fontawesome-user"></span></a>
+            <ul>
+              <li><a href="#" class="facebook"><span class="fontawesome-facebook"></span></a></li>
+              <li><a href="#" class="twitter"><span class="fontawesome-twitter"></span></a></li>
+              <li><a href="#" class="google-plus"><span class="fontawesome-google-plus"></span></a></li>
+              <li><a href="#" class="linkedin"><span class="fontawesome-linkedin"></span></a></li>
+              <li><a href="#" class="github"><span class="fontawesome-github"></span></a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_pack_tag 'application' %>
+</body>
+</html>
