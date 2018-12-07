@@ -20,6 +20,15 @@ class BookingsController < ApplicationController
   end
 
   def show
+
+    @markers = [
+      {
+        lng: @booking.longitude,
+        lat: @booking.latitude,
+        infoWindow: { content: render_to_string(partial: "/bookings/map_box", locals: { booking: @booking }) }
+
+      }]
+
   end
 
   def edit
