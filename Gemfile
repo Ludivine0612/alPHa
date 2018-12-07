@@ -9,6 +9,7 @@ gem 'rails', '5.2.1'
 gem 'redis'
 gem 'devise'
 gem 'faker'
+gem 'geocoder'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
