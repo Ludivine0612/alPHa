@@ -1,2 +1,27 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image: url(<%= image_path 'banner.jpg' %>); background-size: cover; ">
+  <div class="banner-content">
+    <div class="wrapper">
+      <div class="card" style="background-image: url(<%= image_path 'card_boss.jpg' %>);  background-size: cover;" >
+        <div class="info">
+          <h6>Dashboard</h6>
+          <p>Je suis une entreprise</p>
+          <button class="buttons" >Se connecter</button>
+        </div>
+      </div>
+      <div class="card" style="background-image: url(<%= image_path 'card_client.jpg' %>); background-size: cover; " >
+        <div class="info">
+          <h6>Dashboard</h6>
+          <p>Je suis un salarié</p>
+          <button class="buttons" >Se connecter</button>
+        </div>
+      </div>
+      <div class="card" style="background-image: url(<%= image_path 'card_boniche.jpg' %>); background-size: cover; " >
+        <div class="info">
+          <h6>Dashboard</h6>
+          <p>Je suis un client</p>
+          <button class="buttons" >Se connecter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
