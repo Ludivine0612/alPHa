@@ -1,8 +1,49 @@
 <div class="container">
   <div class="row">
     <div class="col-6 col-md-3 col-md-offset-3 edit-delete-icons"">
-        <h1><%= @company.name %></h1>
-        <h3><%= @company.siret %></h3>
+      <div class="thumbnail" id="dash-card">
+        <h7> Bienvenue <%= @company.name %></h7>
+        <br>
+        <h8>N° Siret : <%= @company.siret %></h8>
+      </div>
     </div>
   </div>
+</div>
+<div class="align-card">
+<div class="itemBox">
+  <div class="itemBoxImage">
+    <img src="https://goo.gl/Qydba3" alt="">
+  </div>
+  <div class="itemBoxContent">
+    <a href="#" class="itemCTA"></a>
+    <h3 class="itemTitle">Mes salariés</h3>
+  </div>
+</div>
+<div class="itemBox">
+  <div class="itemBoxImage">
+    <img src="https://goo.gl/Qydba3" alt="">
+  </div>
+  <div class="itemBoxContent">
+    <a href="#" class="itemCTA"></a>
+    <h3 class="itemTitle">Mes clients</h3>
+  </div>
+</div>
+<div class="itemBox">
+  <div class="itemBoxImage">
+    <img src="https://goo.gl/Qydba3" alt="">
+  </div>
+  <div class="itemBoxContent">
+    <a href="/bookings" class="itemCTA"></a>
+    <h3 class="itemTitle">Mes réservations</h3>
+  </div>
+</div>
+<div class="itemBox">
+  <div class="itemBoxImage">
+    <img src="https://goo.gl/Qydba3" alt="">
+  </div>
+  <div class="itemBoxContent">
+    <a href="#" class="itemCTA"></a>
+    <h3 class="itemTitle">Mon planning</h3>
+  </div>
+</div>
 </div>
