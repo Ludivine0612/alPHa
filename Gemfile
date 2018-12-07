@@ -10,6 +10,8 @@ gem 'redis'
 gem 'devise'
 gem 'faker'
 gem 'geocoder'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
@@ -20,6 +22,7 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'cloudinary', '~> 1.9.1'
+gem 'carrierwave', '~> 1.2'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
