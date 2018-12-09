@@ -1,8 +1,10 @@
 <h1>RESERVATION</h1>
 
 <% @bookings.each do |booking| %>
-  <h4><%= booking.start_date %></h4>
-  <h4><%= booking.end_date %></h4>
+  <p>Description de la tâche: <%= booking.prestations.first.description %></p>
+  <p>Adresse: <%= booking.location %></p>
+  <p>Debut: <%= booking.start_date %></p>
+  <p>Fin: <%= booking.end_date %></p>
 <% end %>
 
 <div id="calendar">

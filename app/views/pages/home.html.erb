@@ -14,14 +14,14 @@
         <div class="info">
           <h6>Dashboard</h6>
           <p>Je suis un salarié</p>
-          <button class="buttons" >Accéder</button>
+          <%= link_to "Se connecter", companies_path, class: "button buttons"%>
         </div>
       </div>
       <div class="card" style="background-image: url(<%= image_path 'card_boniche.jpg' %>); background-size: cover; " >
         <div class="info">
           <h6>Dashboard</h6>
           <p>Je suis un client</p>
-          <button class="buttons" >Accéder</button>
+          <%= link_to "Se connecter", companies_path, class: "button buttons"%>
         </div>
       </div>
     </div>

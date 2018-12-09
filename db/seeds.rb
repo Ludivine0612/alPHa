@@ -38,7 +38,7 @@ end
 puts "creating activities..."
 tasks = ["ménage", "jardinage", "bricolage", "nettoyage", "électricité", "massage"]
 6.times do |index|
-  Activity.create(
+  Activity.create!(
     name: tasks[index]
   )
 end
@@ -75,12 +75,15 @@ clients = User.all
     client: clients[index]
     )
   job = new_booking.company.jobs.first
-  Prestation.create!(
-    description: Faker::ChuckNorris.fact,
+  description = ["nettoyer la piscine et cuisine en priorité","couper les arbustes, passer la tondeuse", "réparer la fuite de la salle de bain"]
+  3.times do |index|
+    Prestation.create!(
+    description: description[index],
     booking: new_booking,
     job: job,
     activity: job.activities.first
     )
+  end
 end
 
 
