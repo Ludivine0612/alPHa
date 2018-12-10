@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
       {
         lng: booking.longitude,
         lat: booking.latitude,
-        # infoWindow: { content: render_to_string(partial: "/bookings/map_box", locals: { booking: @bookings }) }
+        infoWindow: { content: render_to_string(partial: "/bookings/map_box", locals: { booking: booking }) }
       }
     end
   end

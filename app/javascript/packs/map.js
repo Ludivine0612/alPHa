@@ -9,19 +9,19 @@ if (mapElement) { // only build a map if there's a div#map to inject into
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
   const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v10'
+    style: 'mapbox://styles/mapbox/satellite-v9'
   });
 
 // [ ... ]
   const markers = JSON.parse(mapElement.dataset.markers);
-
   markers.forEach((marker) => {
     new mapboxgl.Marker()
       .setLngLat([marker.lng, marker.lat])
       .addTo(map)
-      // .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-      // .setHTML(marker.infoWindow.content));
-  })
+      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      .setHTML(marker.infoWindow.content))
+
+  });
 
   if (markers.length === 0) {
     map.setZoom(1);
@@ -34,6 +34,7 @@ if (mapElement) { // only build a map if there's a div#map to inject into
       bounds.extend([marker.lng, marker.lat]);
     });
     map.fitBounds(bounds, { duration: 5500, padding: 75 })
+
   }
   map.addControl(new MapboxGeocoder({
     accessToken: mapboxgl.accessToken
@@ -48,3 +49,14 @@ if (locationInput) {
     container: locationInput
   });
 }
+
+markers.on('mouseover', function (e) {
+      this.openPopup();
+    });
+    markers.on('mouseout', function (e) {
+      this.closePopup();
+    });
+    markers.on('click', function (e) {
+      this.openPopup();
+      //disable mouesout behavior?
+});
