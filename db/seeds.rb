@@ -66,11 +66,12 @@ clients = User.all
     .select{ |user| user.jobs.length == 0 }
     .sample(3)
 3.times do |index|
+  location = ["7 Boulevard Louis Blanc, 83990 Saint-Tropez","1817 Route des Plages, 83350 Ramatuelle","22 Chemin des Salins, 83990 Saint-Tropez"]
   date = Faker::Date.forward(30)
   new_booking = Booking.create!(
     start_date: date,
     end_date: date+1,
-    location: Faker::Address.street_address,
+    location: location[index],
     company: Company.all.select {|company| company.jobs.length >= 1}.sample,
     client: clients[index]
     )
