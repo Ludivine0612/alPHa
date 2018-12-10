@@ -1,20 +1,23 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:new, :show, :edit]
   def index
+    @users = User.joins(:jobs)
     @bookings = Booking.all
     # @bookings = Booking.where.not(latitude: nil, longitude: nil)
     @markers = @bookings.map do |booking|
       {
         lng: booking.longitude,
         lat: booking.latitude,
-        # infoWindow: { content: render_to_string(partial: "/bookings/map_box", locals: { booking: @bookings }) }
+        infoWindow: { content: render_to_string(partial: "/bookings/map_box", locals: { booking: booking }) }
       }
     end
+    gon.bookings = @bookings
   end
 
   def new
     @user = current_user
     @booking = Booking.new
+
   end
 
   def create

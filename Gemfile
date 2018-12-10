@@ -12,7 +12,7 @@ gem 'faker'
 gem 'geocoder'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-
+gem 'gon'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-sass', '~> 5.0.9'
