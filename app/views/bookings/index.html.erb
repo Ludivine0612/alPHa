@@ -2,7 +2,6 @@
 <div id="bloc_page">
   <header>
     <!-- Haut de page -->
-    <h1 class="titre_principal" >flip cards + map</h1>
     <br>
     <br>
     <br>
@@ -53,7 +52,7 @@
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <p>coucou </p>
+            <p>coucou</p>
           </div>
           <div class="flip-card-back">
             <h1>mldc,slsdmlc,sml,</h1>
@@ -76,7 +75,8 @@
     </article>
     <!-- Bloc de la page right-side -->
     <aside>
-      <p>Planning</p><i class="far fa-calendar-alt" data-toggle="modal" data-target="#myModal"></i>
+      <div>
+        <p>Planning</p><i class="far fa-calendar-alt" data-toggle="modal" data-target="#myModal"></i>
             <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
@@ -96,6 +96,7 @@
                 </div>
               </div>
             </div>
+      </div>
       <div id="map" style="width: 100%;
         height: 500px;"
         data-markers="<%= @markers.to_json %>"
@@ -114,3 +115,5 @@
 <%= f.button :submit %>
 <%end%>
 <% end %>
+
+
