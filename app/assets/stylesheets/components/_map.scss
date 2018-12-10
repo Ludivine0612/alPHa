@@ -1,8 +1,32 @@
-.mapboxgl-popup {
-  max-width: 200px;
+body {
+  margin: 0;
+  padding: 0;
 }
 
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.mapboxgl-Popup-content {
+    color: #F3F3DD;
+    background-color: #91785D;
+    border-color: #91785D;
+    max-width: 250px;
+    box-shadow: 3px 3px 2px #8B5D33;
+    font-family: 'Oswald';
+}
+.mapboxgl-popup-close-button {
+  display: none;
+}
 .mapboxgl-popup-content {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  padding: 0;
+  width: 180px;
+}
+.mapboxgl-popup-content-wrapper {
+  padding: 1%;
 }
