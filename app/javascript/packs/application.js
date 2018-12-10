@@ -27,8 +27,9 @@ $('#calendar').fullCalendar({
     {
       events: [ // put the array in the `events` property
         {
-          title  : 'Menage - 29 rue Raphael',
-          start  : '2018-12-12'
+          title  : 'Menage',
+          start  : '2018-12-10',
+          end    : '2018-12-11'
         },
         {
           title  : 'Jardinage',
@@ -48,7 +49,6 @@ $('#calendar').fullCalendar({
     // any other event sources...
 
   ]
-
 });
 
 
