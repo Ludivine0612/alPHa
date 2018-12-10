@@ -27,7 +27,7 @@ $('#calendar').fullCalendar({
     {
       events: [ // put the array in the `events` property
         {
-          title  : 'Menage',
+          title  : 'Menage - 29 rue Raphael',
           start  : '2018-12-12'
         },
         {
