@@ -26,7 +26,7 @@ class PrestationsController < ApplicationController
 
   def update
     if @prestation.update
-      redirect_to "/prestations/#{params[:id]}"
+      redirect_to bookings_path
     else
       render "edit"
     end
