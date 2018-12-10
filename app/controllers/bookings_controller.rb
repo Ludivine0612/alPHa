@@ -2,6 +2,14 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:new, :show, :edit]
   def index
     @bookings = Booking.all
+    # @bookings = Booking.where.not(latitude: nil, longitude: nil)
+    @markers = @bookings.map do |booking|
+      {
+        lng: booking.longitude,
+        lat: booking.latitude,
+        # infoWindow: { content: render_to_string(partial: "/bookings/map_box", locals: { booking: @bookings }) }
+      }
+    end
   end
 
   def new
