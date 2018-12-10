@@ -1,9 +1,10 @@
 <h1>RESERVATION</h1>
 
 <% @bookings.each do |booking| %>
-  <h2><%= booking.start_date %></h2>
-  <h2><%= booking.end_date %></h2>
-  <h2><%= booking.location %></h2>
+  <p>Description de la tâche: <%= booking.prestations.first.description %></p>
+  <p>Adresse: <%= booking.location %></p>
+  <p>Debut: <%= booking.start_date %></p>
+  <p>Fin: <%= booking.end_date %></p>
 <% end %>
 
 <div id="map" style="width: 100%;
