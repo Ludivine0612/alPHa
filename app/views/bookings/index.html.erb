@@ -13,8 +13,18 @@
   <section>
     <article>
       <div class="flip-card">
+
         <div class="flip-card-inner">
           <div class="flip-card-front">
+            <% if !Booking.first.prestations.first.job.nil? %>
+              <span style="font-size: 48px; color: green;">
+                <i class="fas fas_check_circle"></i>
+              </span>
+            <% else %>
+              <span style="font-size: 48px; color: red;">
+                <i class="fas-times-circle"></i>
+              </span>
+            <% end %>
             <p>Ginette</p>
           </div>
           <div class="flip-card-back">
@@ -39,6 +49,7 @@
       </div>
       <br>
       <div class="flip-card">
+
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <p>coucou </p>
