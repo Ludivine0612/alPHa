@@ -12,6 +12,13 @@ class BookingsController < ApplicationController
       }
     end
     gon.bookings = @bookings
+    @events = @bookings.map do |booking|
+      {
+        title: booking.prestations.first.activity,
+        start: booking.start_date,
+        end: booking.end_date
+      }
+    end
   end
 
   def new
