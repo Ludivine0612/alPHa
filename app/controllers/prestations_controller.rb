@@ -36,9 +36,6 @@ class PrestationsController < ApplicationController
 
   private
 
-
-
-
   def set_prestation
     @prestation = Prestation.find(params[:id])
   end
