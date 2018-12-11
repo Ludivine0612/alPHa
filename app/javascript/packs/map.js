@@ -49,14 +49,3 @@ if (locationInput) {
     container: locationInput
   });
 }
-
-markers.on('mouseover', function (e) {
-      this.openPopup();
-    });
-    markers.on('mouseout', function (e) {
-      this.closePopup();
-    });
-    markers.on('click', function (e) {
-      this.openPopup();
-      //disable mouesout behavior?
-});

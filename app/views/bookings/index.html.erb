@@ -16,10 +16,11 @@
 
         <div class="flip-card-inner">
           <div class="flip-card-front">
+            <!-- <span style="font-size: 48px; color: green;"> -->
+                <i class="fas fas-check-circle"></i>
             <% if !Booking.first.prestations.first.job.nil? %>
-              <span style="font-size: 48px; color: green;">
-                <i class="fas fas_check_circle"></i>
-              </span>
+
+
             <% else %>
               <span style="font-size: 48px; color: red;">
                 <i class="fas-times-circle"></i>
