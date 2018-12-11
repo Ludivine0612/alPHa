@@ -1,10 +1,11 @@
 <div class="dropdown">
   <button class="dropbtn fas fa-home"></button>
   <div class="dropdown-content">
-    <a href="#">Accueil</a>
+    <%= link_to "Accueil", home_path %>
     <a href="#">Services</a>
     <a href="#">Contact</a>
-    <a href="#">Mon compte</a>
+    <%= link_to "Log in", new_user_session_path, method: :get %>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
   </div>
 </div>
 

@@ -1,6 +1,18 @@
 import $ from 'jquery';
 import 'fullcalendar';
 
+
+//BUG ??
+//
+// const events = JSON.parse(mapElement.calendar.events);
+// events.forEach((event) => {
+//   new calendar.Event()
+//     .title,
+//     .start,
+//     .end,
+// });
+
+
 $('#calendar').fullCalendar({
     defaultView: 'listWeek',  //je peux afficher à la journée avec listDay
     height: 500,
@@ -20,33 +32,20 @@ $('#calendar').fullCalendar({
       right:  'today prev,next'
     },
     hiddenDays: [ 0 ],  // ici je cache le dimanche
-    eventSources: [
-
-    // your event source
+    events:[
     {
-      event: [ // put the array in the `events` property
-        {
-          title  : 'Menage',
-          start  : '2018-12-10',
-          end    : '2018-12-11'
-        },
-        {
-          title  : 'Jardinage',
-          start  : '2018-12-13',
-          end    : '2018-12-14'
-        },
-        {
-          title  : 'Repassage',
-          start  : '2018-12-14T12:30:00',
-          end    : '2018-12-14T14:30:00'
-        }
-      ],
-      color: 'black',     // an option!
-      textColor: 'yellow' // an option!
+      title  : 'event1',
+      start  : '2010-01-01'
+    },
+    {
+      title  : 'event2',
+      start  : '2010-01-05',
+      end    : '2010-01-07'
+    },
+    {
+      title  : 'event3',
+      start  : '2010-01-09T12:30:00'
     }
-
-    // any other event sources...
-
   ]
 });
 
