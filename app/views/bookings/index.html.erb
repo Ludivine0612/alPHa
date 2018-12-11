@@ -11,73 +11,62 @@
   <!-- Bloc de la page left-side -->
   <section>
     <article>
+      <% current_user.bookings.each do |booking| %>
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <%= simple_form_for @bookings.first.prestations.first do |f| %>
-            <%= f.input :job_id,:collection => @users,:label_method => :first_name,:value_method => :id,:label => "Employée",:include_blank => false %>
-            <%= f.button :submit %>
+            <% if booking.prestations.first.job.nil? %>
+              <span style="font-size: 18px; color: red;">
+                <i class="fas fa-times-circle"></i>
+              </span>
+            <% else %>
+              <span style="font-size: 18px; color: green;">
+                <i class="fas fa-check-circle"></i>
+              </span>
             <% end %>
+
+            <%= simple_form_for booking.prestations.first do |f| %>
+              <%= f.input :job, :collection => booking.company.employees, label_method: :first_name, :label => "Employé : " %>
+              <%= f.button :submit %>
+            <% end %>
+
+
           </div>
           <div class="flip-card-back">
+
             <span>Description du service:</span>
             <p>Nettoyer la piscine et passer la tondeuse.</p>
+
           </div>
         </div>
       </div>
-      <br>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <p>Service demandé: </p>
-            <p></p>
-            <p></p>
-          </div>
-          <div class="flip-card-back">
-            <span>Description du service:</span>
-            <p></p>
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <p>coucou </p>
-          </div>
-          <div class="flip-card-back">
-            <h1>dfdsfsljfoj</h1>
-            <p>fdsokfomskdfmsfdsf</p>
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <p>coucou</p>
-          </div>
-          <div class="flip-card-back">
-            <h1>mldc,slsdmlc,sml,</h1>
-            <p>cdml,msd,msd,mcs,</p>
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <p>coucou </p>
-          </div>
-          <div class="flip-card-back">
-            <h1>Jvfdsfsdf</h1>
-            <p>fdsfmflkdsfcd</p>
-          </div>
-        </div>
-      </div>
+      <% end %>
+
     </article>
     <!-- Bloc de la page right-side -->
     <aside>
+      <div>
+        <p>Planning</p><i class="far fa-calendar-alt" data-toggle="modal" data-target="#myModal"></i>
+            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+            <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h1 class="modal-title">Planning de la semaine</h1>
+              </div>
+              <div class="modal-body">
+                <div id="calendar"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="map" style="width: 100%;
         height: 500px;"
         data-markers="<%= @markers.to_json %>"
@@ -88,37 +77,25 @@
 </div>
 
 
-<% @bookings.each do |booking| %>
-<p>Description de la tâche: <%= booking.prestations.first.description %></p>
-<p>Adresse: <%= booking.location %></p>
-<p>Debut: <%= booking.start_date %></p>
-<p>Fin: <%= booking.end_date %></p>
-<%= simple_form_for booking.prestations.first do |f| %>
-<%= f.input :job_id,:collection => @users,:label_method => :first_name,:value_method => :id,:label => "Employée",:include_blank => false %>
-<%= f.button :submit %>
-<% end %>
-<% end %>
-
 <div>
-  <p>Planning</p><i class="far fa-calendar-alt" data-toggle="modal" data-target="#myModal"></i>
-  <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
-  <!-- Modal -->
-  <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h1 class="modal-title">Planning de la semaine</h1>
-        </div>
-        <div class="modal-body">
-          <div id="calendar">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+        <p>Planning</p><i class="far fa-calendar-alt" data-toggle="modal" data-target="#myModal"></i>
+            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1 class="modal-title">Planning de la semaine</h1>
+                  </div>
+                  <div class="modal-body">
+                    <div id="calendar"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
       </div>
-    </div>
-  </div>
-</div>
