@@ -1,27 +1,26 @@
 <div class="banner">
   <div class="banner-content">
     <h1 class="home-title">Dashboard</h1>
-
     <div class="wrapper">
       <%= link_to companies_path do %>
-      <div class="card" style="background-image: url(<%= image_path 'card_boss.jpg' %>);  background-size: cover;" >
-        <div class="info">
-          <h5>Entreprise</h5>
-        </div>
+      <div class="card home-card" style="background-image: url(<%= image_path 'card_boss.jpg' %>);  background-size: cover;" >
+
+          <h5 class="home-card-title">Entreprise</h5>
+
       </div>
       <% end %>
       <%= link_to companies_path do %>
-      <div class="card" style="background-image: url(<%= image_path 'card_client.jpg' %>); background-size: cover; " >
-        <div class="info">
-          <h5>Client</h5>
-        </div>
+      <div class="card home-card" style="background-image: url(<%= image_path 'card_client.jpg' %>); background-size: cover; " >
+
+          <h5 class="home-card-title">Client</h5>
+
       </div>
       <% end %>
       <%= link_to companies_path do %>
-      <div class="card" style="background-image: url(<%= image_path 'card_boniche.jpg' %>); background-size: cover; " >
-        <div class="info">
-          <h5>Salarié</h5>
-        </div>
+      <div class="card home-card" style="background-image: url(<%= image_path 'card_boniche.jpg' %>); background-size: cover; " >
+
+          <h5 class="home-card-title">Salarié</h5>
+
       </div>
       <% end %>
     </div>
