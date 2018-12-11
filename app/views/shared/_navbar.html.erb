@@ -4,7 +4,7 @@
     <%= link_to "Accueil", home_path %>
     <a href="#">Services</a>
     <a href="#">Contact</a>
-    <%= link_to "Log in", new_user_session_path %>
+    <%= link_to "Log in", new_user_session_path, method: :get %>
     <%= link_to "Log out", destroy_user_session_path, method: :delete %>
   </div>
 </div>
