@@ -1,13 +1,16 @@
 import $ from 'jquery';
 import 'fullcalendar';
 
-const events = JSON.parse(mapElement.calendar.events);
-events.forEach((event) => {
-  new calendar.Event()
-    .title,
-    .start,
-    .end,
-});
+
+//BUG ??
+//
+// const events = JSON.parse(mapElement.calendar.events);
+// events.forEach((event) => {
+//   new calendar.Event()
+//     .title,
+//     .start,
+//     .end,
+// });
 
 
 $('#calendar').fullCalendar({
