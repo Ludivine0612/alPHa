@@ -1,8 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:new, :show, :edit]
   def index
-    @users = User.joins(:jobs)
-    @bookings = Booking.all
+    @bookings = current_user.bookings
     # @bookings = Booking.where.not(latitude: nil, longitude: nil)
     @markers = @bookings.map do |booking|
       {
@@ -12,6 +11,7 @@ class BookingsController < ApplicationController
       }
     end
     gon.bookings = @bookings
+    @prestation_users = get_employees_from_bookings(@bookings)
   end
 
   def new
@@ -51,6 +51,20 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def get_employees_from_bookings(bookings)
+    results = {}
+    bookings.each do |booking|
+      prestation = booking.prestations.first
+      activity = prestation.activity
+      skills = Skill.where(activity: prestation.activity)
+      prestation_users = skills
+        .map{ |skill| skill.job }
+        .select{|job| job.company == booking.company}
+        .map{ |job| job.employee }
+      results[prestation.id] = prestation_users
+    end
+  end
 
   def set_booking
     @booking = Booking.find(params[:id])
