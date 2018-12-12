@@ -5,7 +5,7 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <% current_user.bookings.each do |booking| %>
+      <% current_user.companies.first.bookings.each do |booking| %>
       <div class="booking-card">
         <div class="row">
           <div class="col-md-4">
@@ -15,7 +15,7 @@
             <p>dupont</p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-camera-retro"></i></p>
           </div>
         </div>
         <div class="row">
@@ -26,7 +26,7 @@
             <p>Rue de la pompe a velo</p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-envelope"></i></p>
           </div>
         </div>
         <div class="row">
@@ -37,29 +37,19 @@
             <p>Ménage</p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-search"></i></p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Date de début : <%=  %></p>
+            <p>Date : Début - Fin : <%=  %></p>
           </div>
           <div class="col-md-6">
-            <p>20 décembre</p>
+            <p>20/12/2018 - 21/12/2018</p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <p>Date de fin: <%=  %></p>
-          </div>
-          <div class="col-md-6">
-            <p>21 décembre</p>
-          </div>
-          <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+
           </div>
         </div>
         <div class="row">
@@ -67,10 +57,25 @@
             <p>Employé : <%=  %></p>
           </div>
           <div class="col-md-6">
-            <p>Ici c'est le simple form</p>
+            <%= simple_form_for booking.prestations.first do |f| %>
+            <%= f.input :job, :collection => booking.company.employees, label_method: :first_name, label: false %>
+            <%= f.button :submit, "Mettre à jour" %>
+            <% end %>
+            <% unless booking.prestations.first.job.nil? %>
+            <% end %>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p>
+              <% if booking.prestations.first.job.nil? %>
+              <span style="font-size: 18px; color: red;">
+                <i class="fas fa-2x fa-times-circle"></i>
+              </span>
+              <% else %>
+              <span style="font-size: 18px; color: green;">
+                <i class="fas fa-2x fa-check-circle"></i>
+              </span>
+              <% end %>
+            </p>
           </div>
         </div>
       </div>
