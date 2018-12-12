@@ -1,8 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:new, :show, :edit]
   def index
-    @bookings = current_user.bookings
-    puts @bookings.inspect
+    @bookings = current_user.companies.first.bookings
     # @bookings = Booking.where.not(latitude: nil, longitude: nil)
     @markers = @bookings.map do |booking|
       {
@@ -11,7 +10,7 @@ class BookingsController < ApplicationController
         infoWindow: { content: render_to_string(partial: "/bookings/map_box", locals: { booking: booking }) }
       }
     end
-    gon.bookings = @bookings
+    # gon.bookings = @bookings
     @prestation_users = get_employees_from_bookings(@bookings)
 
     @events = @bookings.map do |booking|
@@ -24,6 +23,16 @@ class BookingsController < ApplicationController
         }
       end
      end
+
+
+    # booking.prestations.first
+    # .job.prestations.map {|prestation|
+    #   {
+    #     title: prestation.activity.name,
+    #     start: prestation.booking.start_date,
+    #     end: prestation.booking.end_date
+    #   }
+    # }
 
   end
 
@@ -71,14 +80,14 @@ class BookingsController < ApplicationController
 
       prestation = booking.prestations.first
       unless prestation.nil?
-      activity = prestation.activity
-      skills = Skill.where(activity: prestation.activity)
-      prestation_users = skills
-        .map{ |skill| skill.job }
-        .select{|job| job.company == booking.company}
-        .map{ |job| job.employee }
-      results[prestation.id] = prestation_users
-    end
+        activity = prestation.activity
+        skills = Skill.where(activity: prestation.activity)
+        prestation_users = skills
+          .map{ |skill| skill.job }
+          .select{|job| job.company == booking.company}
+          .map{ |job| job.employee }
+        results[prestation.id] = prestation_users
+      end
     end
   end
 

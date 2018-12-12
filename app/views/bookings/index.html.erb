@@ -5,17 +5,17 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <% current_user.bookings.each do |booking| %>
+      <% current_user.companies.first.bookings.each do |booking| %>
       <div class="booking-card">
         <div class="row">
           <div class="col-md-4">
             <p>Nom du client : <%= booking.client.first_name %></p>
           </div>
           <div class="col-md-6">
-            <p>dupont</p>
+            <p> <%= booking.client.last_name.capitalize %> <%= booking.client.first_name %></p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-camera-retro"></i></p>
           </div>
         </div>
         <div class="row">
@@ -23,10 +23,10 @@
             <p>Addresse : <%= booking.location %></p>
           </div>
           <div class="col-md-6">
-            <p>Rue de la pompe a velo</p>
+            <p><%= booking.location %></p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-envelope"></i></p>
           </div>
         </div>
         <div class="row">
@@ -34,10 +34,10 @@
             <p>Service demandé : <%= booking.first.activities.first.name %></p>
           </div>
           <div class="col-md-6">
-            <p>Ménage</p>
+            <p><%= booking.prestations.first.activity.name %></p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-search"></i></p>
           </div>
         </div>
         <div class="row">
@@ -45,32 +45,37 @@
             <p>Date de début : <%= booking.start_date %></p>
           </div>
           <div class="col-md-6">
-            <p>20 décembre</p>
+            <p><%= booking.start_date %> - <%= booking.end_date %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Date de fin: <%=  %></p>
+            <p><strong>Employé:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>21 décembre</p>
+            <%= simple_form_for booking.prestations.first do |f| %>
+            <%= f.input :job, :collection => booking.company.employees, label_method: :first_name, label: false %>
+            <%= f.button :submit, "Mettre à jour" %>
+            <% end %>
+            <% unless booking.prestations.first.job.nil? %>
+            <% end %>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <p>Employé : <%=  %></p>
-          </div>
-          <div class="col-md-6">
-            <p>Ici c'est le simple form</p>
-          </div>
-          <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+            <p>
+              <% if booking.prestations.first.job.nil? %>
+              <span style="font-size: 18px; color: red;">
+                <i class="fas fa-2x fa-times-circle"></i>
+              </span>
+              <% else %>
+              <span style="font-size: 18px; color: green;">
+                <i class="fas fa-2x fa-check-circle"></i>
+              </span>
+              <% end %>
+            </p>
           </div>
         </div>
       </div>
