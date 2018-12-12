@@ -15,7 +15,7 @@ Company.destroy_all
 User.destroy_all
 
 puts "creating users..."
-firstnames = ["Elodie", "Ludivine", "Marie", "Margot", "Justine", "Lea", "Marjo", "Christine", "Georgette", "Emma", "Marion","Jonathan","Damien","Julien","Caroline"]
+firstnames = ["Elodie", "Ludivine", "Marie", "Margot", "Justine", "Lea", "Marjo", "Christine", "Georgette", "Emma", "Marion","Jonathan","Xavier","Julien","Caroline"]
 15.times do |index|
   User.create!(
     first_name: firstnames[index],
@@ -27,14 +27,23 @@ firstnames = ["Elodie", "Ludivine", "Marie", "Margot", "Justine", "Lea", "Marjo"
   )
 end
 
+puts "creating ADMIN users..."
+  User.create!(
+    first_name: "Damien",
+    last_name: "Delahaye",
+    address: "47 rue Mazenod, 13002 Marseille" ,
+    phone_number: "0622836301",
+    email: "admin@gmail.com",
+    password: "toto13"
+  )
+
 puts "creating companies..."
-3.times do
   Company.create!(
     siret: Faker::Number.leading_zero_number(10),
-    name: Faker::Company.name,
-    boss: User.all.sample
+    name: "Perfect Home",
+    boss: User.find_by_first_name("Damien")
     )
-end
+
 
 puts "creating activities..."
 tasks = ["ménage", "jardinage", "bricolage", "nettoyage", "électricité", "cuisine"]
@@ -45,11 +54,11 @@ tasks = ["ménage", "jardinage", "bricolage", "nettoyage", "électricité", "cui
 end
 
 puts "creating jobs..."
-employees = User.all.select{ |user| user.companies.length == 0 }.sample(3)
-3.times do |index|
+employees = User.all.select{ |user| user.companies.length == 0 }.sample(5)
+5.times do |index|
   new_job = Job.create!(
     employee: employees[index],
-    company: Company.all.sample
+    company: Company.find_by_name("Perfect Home")
     )
   activities = Activity.all.sample(2)
   2.times do |index|
@@ -61,42 +70,64 @@ employees = User.all.select{ |user| user.companies.length == 0 }.sample(3)
 end
 
 
-puts "creating ADMIN users..."
-  User.create!(
-    first_name: "Damien",
-    last_name: "Delahaye",
-    address: "47 rue Mazenod, 13002 Marseille" ,
-    phone_number: "0622836301",
-    email: "damien@gmail.com",
-    password: "toto13"
-  )
-
 puts "creating bookings..."
 clients = User.all
     .select{ |user| user.companies.length == 0 }
     .select{ |user| user.jobs.length == 0 }
     .sample(5)
-5.times do |index|
-  location = ["7 Boulevard Louis Blanc, 83990 Saint-Tropez","1817 Route des Plages, 83350 Ramatuelle","15 Chemin du Pinet, 83990 Saint-tropez","22 Chemin des Salins, 83990 Saint-Tropez","31-18 Rue de la Resistance, 83990 Saint-Tropez"]
+location = ["7 Boulevard Louis Blanc, 83990 Saint-Tropez","1817 Route des Plages, 83350 Ramatuelle","15 Chemin du Pinet, 83990 Saint-tropez","22 Chemin des Salins, 83990 Saint-Tropez","31-18 Rue de la Resistance, 83990 Saint-Tropez"]
+3.times do |index|
   date = Faker::Date.forward(30)
   new_booking = Booking.create!(
-    user_id: 144,
     start_date: date,
-    end_date: date+1,
+    end_date: date+(1..5).to_a.sample,
     location: location[index],
-    company: Company.all.select {|company| company.jobs.length >= 1}.sample,
+    company: Company.find_by_name("Perfect Home"),
     client: clients[index]
     )
-  job = new_booking.company.jobs.first
-  description = ["Nettoyer la piscine et cuisine en priorité","Couper les arbustes, passer la tondeuse", "Réparer la fuite de la salle de bain", "Vider la piscine et nettoyer le liner", "Préparer l'éclairage pour les décorations de Noël","Prévoir un repas pour 15 invités"]
-  5.times do |index|
+  job = new_booking.company.jobs[index]
+  descriptions = {
+    "ménage" => ["Nettoyer la piscine et cuisine en priorité", "Passer la serpillère et ranger les chambres"],
+    "jardinage" => ["Couper les arbustes, passer la tondeuse", "Tailler les buissons, entretenir le jardin"],
+    "bricolage" => ["Réparer la fuite de la salle de bain", "Problème avec le meuble de la salle à manger"],
+    "nettoyage" => ["Vider la piscine et nettoyer le liner", "Nettoyer les fenêtres"],
+    "électricité" => ["Préparer l'éclairage pour les décorations de Noël", "Problème réseau télé"],
+    "cuisine" => ["Préparer le repas des enfants à déjeuner", "Prévoir un repas pour 15 invités"]
+  }
+    activity = job.activities.sample
     Prestation.create!(
-    description: description[index],
     booking: new_booking,
     job: job,
-    activity: job.activities.first
+    activity: activity,
+    description: descriptions[activity.name].sample
     )
-  end
+
+end
+
+2.times do |index|
+  date = Faker::Date.forward(30)
+  new_booking = Booking.create!(
+    start_date: date,
+    end_date: date+(1..5).to_a.sample,
+    location: location[index],
+    company: Company.find_by_name("Perfect Home"),
+    client: clients[index]
+    )
+  activities = Company.find_by_name("Perfect Home").jobs.map {|job| job.activities}.flatten.uniq
+  descriptions = {
+   "ménage" => ["Nettoyer la piscine et cuisine en priorité", "Passer la serpillère et ranger les chambres"],
+    "jardinage" => ["Couper les arbustes, passer la tondeuse", "Tailler les buissons, entretenir le jardin"],
+    "bricolage" => ["Réparer la fuite de la salle de bain", "Problème avec le meuble de la salle à manger"],
+    "nettoyage" => ["Vider la piscine et nettoyer le liner", "Nettoyer les fenêtres"],
+    "électricité" => ["Préparer l'éclairage pour les décorations de Noël", "Problème réseau télé"],
+    "cuisine" => ["Préparer le repas des enfants à déjeuner", "Prévoir un repas pour 15 invités"]
+  }
+    activity = activities.sample
+    Prestation.create!(
+    booking: new_booking,
+    activity: activity,
+    description: descriptions[activity.name].sample
+    )
 end
 
 
