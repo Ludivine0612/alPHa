@@ -78,14 +78,18 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p><strong>Employé:</strong></p>
+            <p><strong>Employé(e):</strong></p>
           </div>
           <div class="col-md-6">
+            <% if booking.prestations.first.job.nil? %>
             <%= simple_form_for booking.prestations.first do |f| %>
             <%= f.input :job, :collection => booking.company.employees, label_method: :first_name, label: false %>
             <%= f.button :submit, "Mettre à jour", class: "style-button" %>
             <% end %>
             <% unless booking.prestations.first.job.nil? %>
+            <% end %>
+            <% else %>
+            <%= booking.prestations.first.job.employee.first_name %>
             <% end %>
           </div>
           <div class="col-md-2 icone-card-position">
