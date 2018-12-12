@@ -9,10 +9,10 @@
       <div class="booking-card">
         <div class="row">
           <div class="col-md-4">
-            <p>Nom du client : <%=  %></p>
+            <p><strong>Nom du client:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>dupont</p>
+            <p> <%= booking.client.last_name.capitalize %> <%= booking.client.first_name %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-camera-retro"></i></p>
@@ -20,10 +20,10 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Addresse : <%=  %></p>
+            <p><strong>Adresse:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>Rue de la pompe a velo</p>
+            <p><%= booking.location %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-envelope"></i></p>
@@ -31,10 +31,10 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Service demandé : <%=  %></p>
+            <strong>Service demandé:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>Ménage</p>
+            <p><%= booking.prestations.first.activity.name %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-search"></i></p>
@@ -42,10 +42,10 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Date : Début - Fin : <%=  %></p>
+            <p><strong>Date de Début - Fin:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>20/12/2018 - 21/12/2018</p>
+            <p><%= booking.start_date %> - <%= booking.end_date %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
@@ -54,7 +54,7 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Employé : <%=  %></p>
+            <p><strong>Employé:</strong></p>
           </div>
           <div class="col-md-6">
             <%= simple_form_for booking.prestations.first do |f| %>
