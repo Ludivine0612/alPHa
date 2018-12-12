@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row text-center">
     <h1 id="booking-title">RESERVATIONS</h1>
+    <br>
   </div>
   <div class="row" style="height: 70vh;">
     <div class="col-xs-12 col-sm-6">
@@ -66,16 +67,69 @@
               </div>
             <% end %>
         </div>
-        <% end %>
+        <div class="row">
+          <div class="col-md-4">
+            <p>Addresse : <%=  %></p>
+          </div>
+          <div class="col-md-6">
+            <p>Rue de la pompe a velo</p>
+          </div>
+          <div class="col-md-2 icone-card-position">
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <p>Service demandé : <%=  %></p>
+          </div>
+          <div class="col-md-6">
+            <p>Ménage</p>
+          </div>
+          <div class="col-md-2 icone-card-position">
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <p>Date de début : <%=  %></p>
+          </div>
+          <div class="col-md-6">
+            <p>20 décembre</p>
+          </div>
+          <div class="col-md-2 icone-card-position">
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <p>Date de fin: <%=  %></p>
+          </div>
+          <div class="col-md-6">
+            <p>21 décembre</p>
+          </div>
+          <div class="col-md-2 icone-card-position">
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <p>Employé : <%=  %></p>
+          </div>
+          <div class="col-md-6">
+            <p>Ici c'est le simple form</p>
+          </div>
+          <div class="col-md-2 icone-card-position">
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
+          </div>
+        </div>
+      </div>
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6" style="height: 100%;">
-      <div id="map" style="width: 100%; height: 100%;"
+      <div id="map" style="width: 95%; height: 100%;"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
     </div>
   </div>
 </div>
-
-
