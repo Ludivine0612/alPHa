@@ -2,6 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:new, :show, :edit]
   def index
     @bookings = current_user.bookings
+    puts @bookings.inspect
     # @bookings = Booking.where.not(latitude: nil, longitude: nil)
     @markers = @bookings.map do |booking|
       {
