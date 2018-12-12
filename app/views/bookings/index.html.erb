@@ -9,7 +9,7 @@
       <div class="booking-card">
         <div class="row">
           <div class="col-md-4">
-            <p><strong>Nom du client:</strong></p>
+            <p>Nom du client : <%= booking.client.first_name %></p>
           </div>
           <div class="col-md-6">
             <p> <%= booking.client.last_name.capitalize %> <%= booking.client.first_name %></p>
@@ -20,7 +20,7 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p><strong>Adresse:</strong></p>
+            <p>Addresse : <%= booking.location %></p>
           </div>
           <div class="col-md-6">
             <p><%= booking.location %></p>
@@ -31,7 +31,7 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <strong>Service demandé:</strong></p>
+            <p>Service demandé : <%= booking.first.activities.first.name %></p>
           </div>
           <div class="col-md-6">
             <p><%= booking.prestations.first.activity.name %></p>
@@ -42,7 +42,7 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p><strong>Date de Début - Fin:</strong></p>
+            <p>Date de début : <%= booking.start_date %></p>
           </div>
           <div class="col-md-6">
             <p><%= booking.start_date %> - <%= booking.end_date %></p>
