@@ -14,12 +14,15 @@ class BookingsController < ApplicationController
     @prestation_users = get_employees_from_bookings(@bookings)
 
     @events = @bookings.map do |booking|
-      {
-        title: booking.prestations.first.activity.name,
-        start: booking.start_date,
-        end: booking.end_date
-      }
-    end
+      prestation = booking.prestations.first
+      unless prestation.nil?
+        {
+          title: booking.prestations.first.activity.name,
+          start: booking.start_date,
+          end: booking.end_date
+        }
+      end
+     end
 
   end
 
@@ -64,7 +67,9 @@ class BookingsController < ApplicationController
   def get_employees_from_bookings(bookings)
     results = {}
     bookings.each do |booking|
+
       prestation = booking.prestations.first
+      unless prestation.nil?
       activity = prestation.activity
       skills = Skill.where(activity: prestation.activity)
       prestation_users = skills
@@ -72,6 +77,7 @@ class BookingsController < ApplicationController
         .select{|job| job.company == booking.company}
         .map{ |job| job.employee }
       results[prestation.id] = prestation_users
+    end
     end
   end
 
