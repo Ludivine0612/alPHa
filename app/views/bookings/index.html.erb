@@ -8,11 +8,11 @@
       <% current_user.companies.first.bookings.each do |booking| %>
       <div class="booking-card">
         <div class="row">
-          <div class="col-md-4" >
-            <p>Nom du client : <%=  %></p>
+          <div class="col-md-4">
+            <p><strong>Nom du client:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>dupont</p>
+            <p> <%= booking.client.last_name.capitalize %> <%= booking.client.first_name %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-camera-retro"></i></p>
@@ -20,10 +20,10 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Addresse : <%=  %></p>
+            <p><strong>Adresse</strong></p>
           </div>
           <div class="col-md-6">
-            <p>Rue de la pompe a velo</p>
+            <p><%= booking.location %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-envelope"></i></p>
@@ -31,10 +31,10 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Service demandé : <%=  %></p>
+            <p><strong>Service demandé:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>Ménage</p>
+            <p><%= booking.prestations.first.activity.name %></p>
           </div>
           <div class="col-md-2 icone-card-position">
             <p><i style="font-size: 42px;" class="fas fa-2x fa-search"></i></p>
@@ -42,19 +42,43 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Date : Début - Fin : <%=  %></p>
+            <p><strong>Date de début - fin:</strong></p>
           </div>
           <div class="col-md-6">
-            <p>20/12/2018 - 21/12/2018</p>
+            <p><%= booking.start_date %> - <%= booking.end_date %></p>
           </div>
+          <% if !booking.prestations.first.job.nil? %>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt"></i></p>
-
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt" data-toggle="modal" data-target="#my-modal-<%= booking.id.to_s %>"></i></p>
+            <!-- Modal -->
+            <div class="modal fade" id="my-modal-<%= booking.id.to_s %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Planning</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div id="modal-<%= booking.id.to_s %>"class="modal-calendar" data-prestations="<%= booking.prestations.first.job.prestations.map {|prestation| { title: prestation.activity.name, start: prestation.booking.start_date,end: prestation.booking.end_date }}.to_json %>">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <% else %>
+          <div class="col-md-2 icone-card-position">
+            <p><i style="font-size: 42px; color:#9d8f8f;" class="fas fa-2x fa-calendar-times"></i></p>
+          </div>
+          <% end %>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p>Employé : <%=  %></p>
+            <p><strong>Employé:</strong></p>
           </div>
           <div class="col-md-6">
             <%= simple_form_for booking.prestations.first do |f| %>
