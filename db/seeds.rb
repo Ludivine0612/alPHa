@@ -15,9 +15,10 @@ Company.destroy_all
 User.destroy_all
 
 puts "creating users..."
-10.times do
+firstnames = ["Elodie", "Ludivine", "Marie", "Margot", "Justine", "Lea", "Marjo", "Christine", "Georgette", "Emma", "Marion","Jonathan","Damien","Julien","Caroline"]
+15.times do |index|
   User.create!(
-    first_name: Faker::Name.first_name,
+    first_name: firstnames[index],
     last_name: Faker::Name.last_name,
     address: Faker::Address.street_address,
     phone_number: Faker::Number.leading_zero_number(10),
@@ -36,7 +37,7 @@ puts "creating companies..."
 end
 
 puts "creating activities..."
-tasks = ["ménage", "jardinage", "bricolage", "nettoyage", "électricité", "massage"]
+tasks = ["ménage", "jardinage", "bricolage", "nettoyage", "électricité", "cuisine"]
 6.times do |index|
   Activity.create!(
     name: tasks[index]
@@ -60,15 +61,26 @@ employees = User.all.select{ |user| user.companies.length == 0 }.sample(3)
 end
 
 
+puts "creating ADMIN users..."
+  User.create!(
+    first_name: "Damien",
+    last_name: "Delahaye",
+    address: "47 rue Mazenod, 13002 Marseille" ,
+    phone_number: "0622836301",
+    email: "damien@gmail.com",
+    password: "toto13"
+  )
+
 puts "creating bookings..."
 clients = User.all
     .select{ |user| user.companies.length == 0 }
     .select{ |user| user.jobs.length == 0 }
-    .sample(3)
-3.times do |index|
-  location = ["7 Boulevard Louis Blanc, 83990 Saint-Tropez","1817 Route des Plages, 83350 Ramatuelle","22 Chemin des Salins, 83990 Saint-Tropez"]
+    .sample(5)
+5.times do |index|
+  location = ["7 Boulevard Louis Blanc, 83990 Saint-Tropez","1817 Route des Plages, 83350 Ramatuelle","15 Chemin du Pinet, 83990 Saint-tropez","22 Chemin des Salins, 83990 Saint-Tropez","31-18 Rue de la Resistance, 83990 Saint-Tropez"]
   date = Faker::Date.forward(30)
   new_booking = Booking.create!(
+    user_id: 144,
     start_date: date,
     end_date: date+1,
     location: location[index],
@@ -76,8 +88,8 @@ clients = User.all
     client: clients[index]
     )
   job = new_booking.company.jobs.first
-  description = ["nettoyer la piscine et cuisine en priorité","couper les arbustes, passer la tondeuse", "réparer la fuite de la salle de bain"]
-  3.times do |index|
+  description = ["Nettoyer la piscine et cuisine en priorité","Couper les arbustes, passer la tondeuse", "Réparer la fuite de la salle de bain", "Vider la piscine et nettoyer le liner", "Préparer l'éclairage pour les décorations de Noël","Prévoir un repas pour 15 invités"]
+  5.times do |index|
     Prestation.create!(
     description: description[index],
     booking: new_booking,
