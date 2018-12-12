@@ -3,8 +3,8 @@
     <h1 id="booking-title">RESERVATIONS</h1>
     <br>
   </div>
-  <div class="row">
-    <div class="col-md-6">
+  <div class="row" style="height:80vh;">
+    <div id="scroll-card" class="col-md-6"  >
       <% current_user.companies.first.bookings.each do |booking| %>
       <div class="booking-card">
         <div class="row">
@@ -83,7 +83,7 @@
           <div class="col-md-6">
             <%= simple_form_for booking.prestations.first do |f| %>
             <%= f.input :job, :collection => booking.company.employees, label_method: :first_name, label: false %>
-            <%= f.button :submit, "Mettre à jour" %>
+            <%= f.button :submit, "Mettre à jour", class: "style-button" %>
             <% end %>
             <% unless booking.prestations.first.job.nil? %>
             <% end %>
@@ -106,7 +106,7 @@
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6" style="height: 100%;">
-      <div id="map" style="width: 95%; height: 100%;"
+      <div id="map" style="width: 95%; height: 80vh;"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
