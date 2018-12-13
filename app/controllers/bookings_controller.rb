@@ -32,8 +32,9 @@ class BookingsController < ApplicationController
     #     start: prestation.booking.start_date,
     #     end: prestation.booking.end_date
     #   }
-    # }
+    #
 
+    gon.booking_ids = @bookings.pluck(:id)
   end
 
   def new
