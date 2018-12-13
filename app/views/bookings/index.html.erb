@@ -15,18 +15,18 @@
             <p> <%= booking.client.last_name.capitalize %> <%= booking.client.first_name %></p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-camera-retro"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-camera-retro hover-icone"></i></p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p><strong>Adresse</strong></p>
+            <p><strong>Adresse:</strong></p>
           </div>
           <div class="col-md-6">
             <p><%= booking.location %></p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-envelope"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-envelope hover-icone" id="sweet-alert-demo"></i></p>
           </div>
         </div>
         <div class="row">
@@ -37,7 +37,7 @@
             <p><%= booking.prestations.first.activity.name.capitalize %></p>
           </div>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-search"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-search hover-icone"></i></p>
           </div>
         </div>
         <div class="row">
@@ -49,7 +49,7 @@
           </div>
           <% if !booking.prestations.first.job.nil? %>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt" data-toggle="modal" data-target="#my-modal-<%= booking.id.to_s %>"></i></p>
+            <p><i style="font-size: 42px;" class="fas fa-2x fa-calendar-alt hover-icone" data-toggle="modal" data-target="#my-modal-<%= booking.id.to_s %>"></i></p>
             <!-- Modal -->
             <div class="modal fade" id="my-modal-<%= booking.id.to_s %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
@@ -71,7 +71,7 @@
           </div>
           <% else %>
           <div class="col-md-2 icone-card-position">
-            <p><i style="font-size: 42px; color:#9d8f8f;" class="fas fa-2x fa-calendar-times"></i></p>
+            <p><i style="font-size: 42px; color:#9d8f8f;" class="hover-icone fas fa-2x fa-calendar-times"></i></p>
           </div>
           <% end %>
         </div>
