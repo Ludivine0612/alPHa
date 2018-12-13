@@ -1,7 +1,9 @@
 import swal from 'sweetalert';
 
+
 function bindSweetAlertButtonDemo() {
-  const swalButton = document.getElementById('sweet-alert-demo');
+  for(var i=0; i<gon.booking_ids.length;i++) {
+  let swalButton = document.getElementById('sweet-alert-demo-'+gon.booking_ids[i]);
   if (swalButton) { // protect other pages
     swalButton.addEventListener('click', () => {
       swal({
@@ -12,5 +14,5 @@ function bindSweetAlertButtonDemo() {
     });
   }
 }
-
+}
 export { bindSweetAlertButtonDemo };
